@@ -8,3 +8,9 @@ ultree is a pure, native javascript library that doesn't require any other heavy
 ```html
 <script src="ultree.min.js"></script>
 ```
+```javascriot
+  ultree.generateTree({
+    listId: "f1teams",
+    bullet: '&#149;'
+  });
+```
