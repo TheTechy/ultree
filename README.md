@@ -11,7 +11,7 @@ ultree has full search functionality which can interogate multiple nested elemen
 
 ultree can also programmaitically expand and colapse lists in a single function call.
 
-It also has full control over the bullets used in the list ranging from none to using unicode characters to display simple bullets &#149; or more complex images such as &#129412;
+It also has full control over the bullets used in the list ranging from none to using unicode characters to display simple bullets • or more complex images such as &#129412;
 
 Because each instance of ultree is fully self contained, you can have any number of lists on the same page.
 
@@ -87,7 +87,7 @@ listId: The first property is a string which is the id of the unordered list. An
 
 bullet: This can be any string but you will usually want to use a character icon. The best way to generate an icon is to use unicode characters. A great resource to find unicode characters is amp-what http://www.amp-what.com/unicode/search/ If you omit this parameter, the tree will be built as normal but the list items will not have a bullet point.  
 
-The below example shows how to call generateTree against a unordered list with an id of 'f1teams'
+The below example shows how to call ultree.generateTree against a unordered list with an id of 'f1teams'. The example will also add a bullet point [•] to each item.
 ```HTML
 <script>
   ultree.generateTree({
@@ -104,13 +104,12 @@ The search function takes a javascript object as a single parameter. It has two 
 listId: The first property is a string which is the id of the unordered list. Any unordered list that you want to change into an interactive tree require a DOM id.  
 searchValue: The value that you want to search for.
 
-The below example shows how to call...
-
+The below example shows how to call ultree.search against a unordered list with an id of 'f1teams' searching for 'Red Bull.  
 ```HTML
 <script>
   ultree.search({
     listId: 'f1teams',
-    searchValue: 'search value here'
+    searchValue: 'Red Bull'
   });
 </script>
 ```
@@ -123,12 +122,12 @@ The filterTree function takes a javascript object as a single parameter. It has 
 listId: The first property is a string which is the id of the unordered list. Any unordered list that you want to change into an interactive tree require a DOM id.  
 filterValue: The value that you want to filter for.  
 
-The below example shows how to call...  
+The below example shows how to call ultree.filterTree against a unordered list with an id of 'f1teams' searching for 'Red Bull. It will filter the tree to only display the 'Red Bull' item.  
 ```HTML
 <script>
   ultree.filterTree({
-    listId: 'f1combined',
-    filterValue: this.value
+    listId: 'f1teams',
+    filterValue: 'Red Bull'
   });
 </script>
 ```
