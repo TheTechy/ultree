@@ -67,7 +67,7 @@ And that's all there is to it!
 You have just created an interactive tree from simple HTML.
 ***
 # API
-ultree's API is simple. There are only five main functions:
+ultree's API is simple. There are only five functions:
 
 generateTree  
 search  
@@ -75,18 +75,19 @@ filterTree
 openAll  
 closeAll
 
-## generateTree
-As the name suggest, generateTree is the function called to transform your unordered list into an interactive tree.  
-The function takes a javascript object as a single parameter.
+## ultree.generateTree
+As the name suggest, **generateTree** is the function called to transform your unordered list into an interactive tree. The function takes a javascript object as a single parameter.  
+When you search for an item within a tree, ultree will firsly find the item and then traverse up the tree opening parent nodes where applicable.
 
-That object two properties:  
+That function two properties:  
   listId: {Required} String  
   bullet: {Optional} String
 
 listId: The first property is a string which is the id of the unordered list. Any unordered list that you want to change into an interactive tree require a DOM id.  
 
-bullet: This can be any string but you will usually want to use a character icon. The best way to generate an icon is to use unicode characters. A great resource to find unicode characters is amp-what http://www.amp-what.com/unicode/search/
+bullet: This can be any string but you will usually want to use a character icon. The best way to generate an icon is to use unicode characters. A great resource to find unicode characters is amp-what http://www.amp-what.com/unicode/search/ If you omit this parameter, the tree will be built as normal but the list items will not have a bullet point.  
 
+The below example shows how to call generateTree against a unordered list with an id of 'f1teams'
 ```HTML
 <script>
   ultree.generateTree({
@@ -95,4 +96,39 @@ bullet: This can be any string but you will usually want to use a character icon
   });
 </script>
 ```  
-## search
+## ultree.search  
+The search function takes a javascript object as a single parameter. It has two properties:  
+  listId:       {Required} String  
+  searchValue:  {Required} String  
+
+listId: The first property is a string which is the id of the unordered list. Any unordered list that you want to change into an interactive tree require a DOM id.  
+searchValue: The value that you want to search for.
+
+The below example shows how to call...
+
+```HTML
+<script>
+  ultree.search({
+    listId: 'f1teams',
+    searchValue: 'search value here'
+  });
+</script>
+```
+
+## ultree.filterTree
+The filterTree function takes a javascript object as a single parameter. It has two properties:  
+  listId:       {Required} String  
+  filterValue:  {Required} String  
+
+listId: The first property is a string which is the id of the unordered list. Any unordered list that you want to change into an interactive tree require a DOM id.  
+filterValue: The value that you want to filter for.  
+
+The below example shows how to call...  
+```HTML
+<script>
+  ultree.filterTree({
+    listId: 'f1combined',
+    filterValue: this.value
+  });
+</script>
+```
