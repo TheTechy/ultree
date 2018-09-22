@@ -1,5 +1,5 @@
 # ultree v1.0.1
-ultree is a native javascript library for creating and managing interactive trees in hTML. It requires no external libraries such as jQuery and is tiny, being only (5kb) minified. It wraps around a standard HTML unordered list meaning there is no complex json data structures to learn or coding required to create a interactive tree view.  
+ultree is a native javascript library for creating and managing interactive trees in hTML. It requires no external libraries such as jQuery and is tiny, being only (6kb) minified. It wraps around a standard HTML unordered list meaning there is no complex json data structures to learn or coding required to create a interactive tree view.  
 
 Because ultree doesn't effect any element of the HTML you are passing it, lists can contain any valid elements such as anchors, divs etc. ultree maintains your data integrity so you can be confident your data won't be hidden or modified.  
 
