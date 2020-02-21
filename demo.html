@@ -1,0 +1,373 @@
+<!doctype html>
+<html>
+	<head>
+		<title>ultree - a tiny javascript library for creating and managing interactive trees in HTML</title>
+		<style>
+			html, body {
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				padding: 0;
+			}
+			body {
+				font-family: Sans-Serif;
+				font-size: 16px;
+			}
+			main {
+				display: grid;
+				display: -ms-grid;
+				grid-template-columns: 420px auto;
+				-ms-grid-column: 420px auto;
+				grid-column: 420px auto;
+				grid-template-rows: 100%;
+			}
+			main > div:nth-child(1) {
+				background-color: rgb(248, 250, 252);
+				padding: 8px;
+			}
+			main > div:nth-child(2) {
+				background-color: rgb(234, 236, 238);
+				padding: 14px;
+			}
+			button {
+				display: inline-block;
+				border: none;
+				padding: 4px 6px;
+				margin: 0px 4px;
+				text-decoration: none;
+				background: #0069ed;
+				color: #ffffff;
+				font-family: sans-serif;
+				font-size: 0.9rem;
+				cursor: pointer;
+				text-align: center;
+				transition: background-color 250ms ease-in-out, 
+							transform 150ms ease;
+				-webkit-appearance: none;
+				-moz-appearance: none;
+			}
+			button:hover, button:focus {
+				background: #0053ba;
+			}
+
+			button:focus {
+				outline-offset: -4px;
+			}
+
+			button:active {
+				transform: scale(0.99);
+			}
+			input[type=text] {
+				appearance: none;
+				-webkit-appearance: none;
+				-moz-appearance: none;
+				min-height: 18px;
+				min-width: 130px;
+				display: inline-block;
+				font-size: 1.1rem;
+				font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+				border: 1px solid rgb(222, 226, 228);
+				background-color: rgb(251, 251, 251);
+				border-color: rgb(222,222,222);
+				outline: none;
+				box-shadow: none;
+				padding: 0 4px 0 4px;
+				border-radius: 3px;
+				-webkit-border-radius: 3px;
+				-moz-border-radius: 3px;
+			}
+			pre { font-family: monospace; }
+		</style>
+		<link rel="stylesheet" href="ultree.css"/>
+	</head>
+	<body>
+		<main>
+			<div>
+				<h1>Examples</h1><hr>
+				
+				<h2>F1 Teams</h2>
+				<label for="myInput" style='display: inline-block; min-width: 60px;'>Search: </label>
+				<input type="text" id="searchTeams" placeholder="Search F1 teams..." title="Type in a name">
+				<button id='f1combinedsearch'>Search</button><br>
+				
+				<label for="myInput" style='display: inline-block; min-width: 60px;'>Filter: </label>
+				<input type="text" id="myInput" onkeyup="ultree.filterTree({listId: 'f1combined', filterValue: this.value})" placeholder="Filter names.." title="Type in a name"><br><br>
+				
+				<button id='f1combinedopen'>Open F1 combined</button><button id='f1combinedclose'>Close f1 combined</button><br><br>
+				<ul id='f1combined' class='ultree'>
+					<li>Formula One Teams (2018)
+						<ul>
+							<li><a href='https://www.mercedesamgf1.com/en/mercedes-amg-f1/' target='_blank'>Mercedes AMG Petronas Motorsport</a>
+								<ul>
+									<li>Lewis Hamilton</li>
+									<li>Valtteri Bottas</li>
+								</ul>
+							</li>
+							<li><a href='http://formula1.ferrari.com/en/' target='_blank'>Scuderia Ferrari</a>
+								<ul>
+									<li>Sebastian Vettel</li>
+									<li>Kimi Räikkönen</li>
+								</ul>
+							</li>
+							<li><a href='https://redbullracing.redbull.com/' target='_blank'>Aston Martin Red Bull Racing</a>
+								<ul>
+									<li>Daniel Ricciardo</li>
+									<li>Max Verstappen</li>
+								</ul>
+							</li>
+							<li><a href='https://www.renaultsport.com/-Formule-1-330-.html/' target='_blank'>Renault Sport Formula One Team</a>
+								<ul>
+									<li>Nico Hulkenberg</li>
+									<li>Carlos Sainz</li>
+								</ul>
+							</li>
+							<li><a href='https://www.haasf1team.com/' target='_blank'>Haas F1 Team</a>
+								<ul>
+									<li>Romain Grosjean</li>
+									<li>Kevin Magnussen</li>
+								</ul>
+							</li>
+							<li><a href='https://www.mclaren.com/formula1/' target='_blank'>McLaren F1 Team</a>
+								<ul>
+									<li>Fernando Alonso</li>
+									<li>Stoffel Vandoorne</li>
+								</ul>
+							</li>
+							<li><a href='https://www.forceindiaf1.com/team/' target='_blank'>Racing Point Force India F1 Team</a>
+								<ul>
+									<li>Sergio Perez</li>
+									<li>Esteban Ocon</li>
+								</ul>
+							</li>
+							<li><a href='https://www.forceindiaf1.com/team/' target='_blank'>Red Bull Toro Rosso Honda</a>
+								<ul>
+									<li>Pierre Gasly</li>
+									<li>Brendon Hartley</li>
+								</ul>
+							</li>
+							<li><a href='https://www.sauberf1team.com/' target='_blank'>Alfa Romeo Sauber F1 Team</a>
+								<ul>
+									<li>Marcus Ericsson</li>
+									<li>Charles Leclerc</li>
+								</ul>
+							</li>
+							<li><a href='https://www.williamsf1.com/racing/' target='_blank'>Williams Martini Racing</a>
+								<ul>
+									<li>TEST
+										<ul>
+											<li>AAA</li>
+											<li>BBB</li>
+											<li>CCC</li>
+										</ul>
+									</li>
+									<li>Lance Stroll</li>
+									<li>Sergey Sirotkin</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul><br>
+				<hr>
+				<h2>F1 Races</h2>
+				<label for="myInput2" style='display: inline-block; min-width: 60px;'>Filter: </label>
+				<input type="text" id="myInput2" placeholder="Filter races..." title="Type in a name"><br>
+				<label for="myInput" style='display: inline-block; min-width: 60px;'>Search: </label>
+				<input type="text" id="searchRaces" placeholder="Search for names.." title="Type in a name">
+				<button id='f1combinedsearch'>Search</button><br>
+				
+				<ul id='f1races' class='ultree'>
+					<li>Formula One Races (2018)
+						<ul>
+							<li>Australian Grand Prix</li>
+							<li>Bahrain Grand Prix</li>
+							<li>Chinese Grand Prix</li>
+							<li>Azerbaijan Grand Prix</li>
+							<li>Spanish Grand Prix</li>
+							<li>Monaco Grand Prix</li>
+							<li>Canadian Grand Prix</li>
+							<li>French Grand Prix</li>
+							<li>Austrian Grand Prix</li>
+							<li>British Grand Prix</li>
+							<li>German Grand Prix</li>
+							<li>Hungarian Grand Prix</li>
+							<li>Belgian Grand Prix</li>
+							<li>Italian Grand Prix</li>
+							<li>Singapore Grand Prix</li>
+							<li>Russian Grand Prix</li>
+							<li>Japanese Grand Prix</li>
+							<li>United States Grand Prix</li>
+							<li>Mexican Grand Prix</li>
+							<li>Brazilian Grand Prix</li>
+							<li>Abu Dhabi Grand Prix</li>
+						</ul>
+					</li>
+				</ul><br>
+			</div>
+
+			<div>
+				<h1><a id="ultree_v101_0"></a>ultree v1.0.1</h1>
+				<p>ultree is a native javascript library for creating and managing interactive trees in HTML. It requires no external libraries such as jQuery and is tiny, being only (6kb) minified. It wraps around a standard HTML unordered list meaning there is no complex json data structures to learn or coding required to create a interactive tree view.</p>
+				<p>Because ultree doesn’t effect any element of the HTML you are passing it, lists can contain any valid elements such as anchors, divs etc. ultree maintains your data integrity so you can be confident your data won’t be hidden or modified.</p>
+				<p>ultree has full search functionality which can interogate multiple nested elements up to 100 deep. There is also a filter function that will filter your list based on a quick text input. ultree can also programmaitically expand and colapse lists in a single function call. It also has full control over the bullets used in the list ranging from none to using unicode characters to display simple bullets • or more complex images such as 🦄</p>
+				<p>Because each instance of ultree is fully self contained, you can have any number of lists on the same page.</p>
+				<p>Performance is also critical and ultree takes account of this. It has been tested with lists of up to 15,000 nodes and over 200 nested child nodes.</p>
+				<hr>
+				<h2><a id="Getting_started_12"></a>Getting started</h2>
+				<p>ultree has two componants, a stylesheet and the javascript library itself.</p>
+				<p>Begin by downloading the ultree zip file from <a href="https://github.com/TheTechy/ultree/archive/master.zip">https://github.com/TheTechy/ultree/archive/master.zip</a> or cloning the repo from this link <a href="https://github.com/TheTechy/ultree.git">https://github.com/TheTechy/ultree.git</a></p>
+				<p>Once you have the files, create a link to the css file in your HTML page. For example:</p>
+				<pre><code class="language-HTML">
+					<span>&lt;<span>link</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"ultree.css"</span>/&gt;</span>
+				</code></pre>
+				<p>Next build your unordered list. This will become your tree. There is a more detailed explanation in zip file on how to build your unordered list, but here is a quick example. As you can see, it is standard HTML with unordered list nested inside the list item of an unordered list.</p>
+				<pre>
+					<span>&lt;ul id='f1teams' class='ultree'&gt;</span>
+					<div>&lt;li&gt;Formula One Teams (2018)
+					<span>&lt;<span>ul</span>&gt;</span>
+						<span>&lt;<span>li</span>&gt;</span>Scuderia Ferrari<span>&lt;/<span>li</span>&gt;</span>
+						<span>&lt;<span>li</span>&gt;</span>Sahara Force India F1 Team<span>&lt;/<span>li</span>&gt;</span>
+						<span>&lt;<span>li</span>&gt;</span>Haas F1 Team<span>&lt;/<span>li</span>&gt;</span>
+						<span>&lt;<span>li</span>&gt;</span>McLaren F1 Team<span>&lt;/<span>li</span>&gt;</span>
+						<span>&lt;<span>li</span>&gt;</span>Mercedes AMG Petronas Motorsport<span>&lt;/<span>li</span>&gt;</span>
+						<span>&lt;<span>li</span>&gt;</span>Aston Martin Red Bull Racing<span>&lt;/<span>li</span>&gt;</span>
+						<span>&lt;<span>li</span>&gt;</span>Renault Sport Formula One Team<span>&lt;/<span>li</span>&gt;</span>
+						<span>&lt;<span>li</span>&gt;</span>Alfa Romeo Sauber F1 Team<span>&lt;/<span>li</span>&gt;</span>
+						<span>&lt;<span>li</span>&gt;</span>Red Bull Toro Rosso Honda<span>&lt;/<span>li</span>&gt;</span>
+						<span>&lt;<span>li</span>&gt;</span>Williams Martini Racing<span>&lt;/<span>li</span>&gt;</span>
+					<span>&lt;/<span>ul</span>&gt;</span>
+					<span>&lt;/<span>li</span>&gt;</span>
+				<span>&lt;/<span>ul</span>&gt;</span>
+				</code></pre>
+				<p>Once you have your unordered list setup, you can now add the ultree library. (The hope is to have ultree available via a CDN very soon) Add the file in the usual way via a script tag and point the src to the <strong>ultree.min.js</strong> (The unminified source is included in the zip file)</p>
+				<pre><code class="language-HTML"><span>&lt;<span>script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"ultree.min.js"</span>&gt;</span><span class="undefined"></span><span>&lt;/<span>script</span>&gt;</span>
+				</code></pre>
+				<p>With your list and script in place, you can now call the generateTree method. This performs an analysis of the unordered list, collates the relevant child nodes and displays the result inline. Notice in this example, the standard bullet point has been applied via the second parameter within the object. This would match a normal unordered list bullet point in HTML.</p>
+				<pre><code class="language-HTML"><span>&lt;<span>script</span>&gt;</span><span class="actionscript">
+					ultree.generateTree({
+					listId: <span class="hljs-string">"f1teams"</span>,
+					bullet: <span class="hljs-string">'&amp;#149;'</span>
+					});
+				</span><span>&lt;/<span>script</span>&gt;</span>
+				</code></pre>
+				<p>And that’s all there is to it!<br>
+				You have just created an interactive tree from simple HTML.</p>
+				<hr>
+				<h1><a id="API_57"></a>API</h1>
+				<p>ultree’s API is simple. There are only five functions:</p>
+				<ul>
+				<li>generateTree</li>
+				<li>search</li>
+				<li>filterTree</li>
+				<li>openAll</li>
+				<li>closeAll</li>
+				</ul>
+				<h2><a id="ultreegenerateTree_65"></a>ultree.generateTree</h2>
+				<p>As the name suggest, <strong>generateTree</strong> is the function called to transform your unordered list into an interactive tree.</p>
+				<p><strong>ultree.generateTree</strong> takes a javascript object as a single parameter. It has two properties:</p>
+				<ul>
+				<li>listId: {Required} String</li>
+				<li>bullet: {Optional} String</li>
+				</ul>
+				<p><strong>listId</strong>: The first property is a string which is the ID of the unordered list. Any unordered list that you want to change into an interactive tree requires an HTML DOM ID. Only the parent unordered list requires an ID as you can see from the example above.</p>
+				<p><strong>bullet</strong>: This can be any string but you will usually want to use a character icon. The best way to generate an icon is to use unicode characters. A great resource to find unicode characters is amp-what <a href="http://www.amp-what.com/unicode/search/">http://www.amp-what.com/unicode/search/</a> If you omit this parameter, the tree will be built as normal but the list items will not have a bullet point.</p>
+				<p>The below example shows how to call ultree.generateTree against a unordered list with an id of ‘f1teams’. The example will also add a bullet point [•] to each item.</p>
+				<pre><code class="language-HTML"><span>&lt;<span>script</span>&gt;</span><span class="actionscript">
+					ultree.generateTree({
+					listId: <span class="hljs-string">"f1teams"</span>,
+					bullet: <span class="hljs-string">'&amp;#149;'</span>
+					});
+				</span><span>&lt;/<span>script</span>&gt;</span>
+				</code></pre>
+				<h2><a id="ultreesearch_86"></a>ultree.search</h2>
+				<p><strong>ultree.search</strong> takes a javascript object as a single parameter. It has two properties:</p>
+				<ul>
+				<li>listId:       {Required} String</li>
+				<li>searchValue:  {Required} String</li>
+				</ul>
+				<p><strong>listId</strong>: The first property is a string which is the id of the unordered list.<br>
+				<strong>searchValue</strong>: The value that you want to search for.</p>
+				<p>The below example shows how to call ultree.search against a unordered list with an id of ‘f1teams’ searching for ‘Red Bull’.</p>
+				<pre><code class="language-HTML"><span>&lt;<span>script</span>&gt;</span><span class="actionscript">
+					ultree.search({
+					listId: <span class="hljs-string">'f1teams'</span>,
+					searchValue: <span class="hljs-string">'Red Bull'</span>
+					});
+				</span><span>&lt;/<span>script</span>&gt;</span>
+				</code></pre>
+				<p>When you search for an item within a tree, ultree will firsly find the item and then traverse up the tree opening only the direct parent nodes where applicable.</p>
+				<h2><a id="ultreefilterTree_105"></a>ultree.filterTree</h2>
+				<p><strong>ultree.filterTree</strong> takes a javascript object as a single parameter. It has two properties:</p>
+				<ul>
+				<li>listId:       {Required} String</li>
+				<li>filterValue:  {Required} String</li>
+				</ul>
+				<p><strong>listId</strong>: The first property is a string which is the id of the unordered list.<br>
+				<strong>searchValue</strong>: The value that you want to filter for.</p>
+				<p>The below example shows how to call <strong>ultree.filterTree</strong> against a unordered list with an id of ‘f1teams’ searching for ‘Red Bull’</p>
+				<pre><code class="language-HTML"><span>&lt;<span>script</span>&gt;</span><span class="actionscript">
+					ultree.filterTree({
+					listId: <span class="hljs-string">'f1teams'</span>,
+					filterValue: <span class="hljs-string">'Red Bull'</span>
+					});
+				</span><span>&lt;/<span>script</span>&gt;</span>
+				</code></pre>
+				<p>When you call <strong>ultree.filterTree</strong>, it will filter the your tree to only display the item/s you have filtered for, traversing up the tree expanding parent nodes as required and hiding all other nodes that don’t match your filter criteria.</p>
+				<h2><a id="ultreeopenAll_124"></a>ultree.openAll</h2>
+				<p><strong>ultree.openAll</strong> has a single parameter.</p>
+				<ul>
+				<li>listId:       {Required} String</li>
+				</ul>
+				<p><strong>listId</strong>: The first property is a string which is the id of the unordered list.</p>
+				<p>The below example shows how to call <strong>ultree.openAll</strong> against a unordered list with an id of ‘f1teams’.</p>
+				<pre><code class="language-HTML"><span>&lt;<span>script</span>&gt;</span><span class="actionscript">
+					ultree.openAll(<span class="hljs-string">'f1teams'</span>);
+				</span><span>&lt;/<span>script</span>&gt;</span>
+				</code></pre>
+				<p>When you call <strong>ultree.openAll</strong>, it will run through the entire tree and open all node that have children. This will expand the tree to its maximum.</p>
+				<h2><a id="ultreecloseAll_138"></a>ultree.closeAll</h2>
+				<p><strong>ultree.closeAll</strong> has a single parameter.</p>
+				<ul>
+				<li>listId:       {Required} String</li>
+				</ul>
+				<p><strong>listId</strong>: The first property is a string which is the id of the unordered list.</p>
+				<p>The below example shows how to call <strong>ultree.closeAll</strong> against a unordered list with an id of ‘f1teams’.</p>
+				<pre><code class="language-HTML"><span>&lt;<span>script</span>&gt;</span><span class="actionscript">
+					ultree.openAll(<span class="hljs-string">'f1teams'</span>);
+				</span><span>&lt;/<span>script</span>&gt;</span>
+				</code></pre>
+				<p>When you call <strong>ultree.closeAll</strong>, it will run through the entire tree and close all node that have children. This will close the tree to its maximum.</p>
+			</div>
+		</main>
+		<script src="ultree.js"></script>
+		<script>
+			ultree.generateTree({
+				listId: "f1combined",
+				bullet:	'&#149;'
+			});
+
+			ultree.generateTree({
+				listId: "f1races",
+				bullet:	'&#127950;'
+			});
+			
+			document.getElementById('f1combinedopen').addEventListener('click', (evt) => {
+				ultree.openAll('f1combined');
+			}, true);
+
+			document.getElementById('f1combinedclose').addEventListener('click', (evt) => {
+				ultree.closeAll('f1combined');
+			}, true);
+
+			document.getElementById('f1combinedsearch').addEventListener('click', (evt) => {
+				ultree.search({
+					listId: 'f1combined',
+					searchValue: document.getElementById('searchTeams').value
+				});
+			}, true);
+
+			document.getElementById('myInput2').addEventListener('keyup', (evt) => {
+				ultree.filterTree({listId: 'f1races', filterValue: document.getElementById('myInput2').value})
+			}, true);
+		</script>
+	</body>
+</html>
